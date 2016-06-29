@@ -19,8 +19,8 @@ export default class Main extends Component {
     this.onClick = this.onClick.bind(this)
   }
 
-  onClick (e) {
-    const el = e.currentTarget
+  onClick (se) {
+    const el = se.currentTarget
 
     TweenMax.from(el, 1, {
       css: { rotation: 360 },

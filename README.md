@@ -1,5 +1,9 @@
-# Building a seed project with Webpack, ReactJS, and ES6
+# Base project with Webpack, ReactJS, and ES6
 
-This is a repo supporting a [blog series](http://www.jordanpapaleo.com/blog/) I wrote.  Each branch corresponds with a part of the blog series.
+```
+npm install -g eslint-plugin-react
+
+npm uninstall -g eslint && npm install -g eslint
+```
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)

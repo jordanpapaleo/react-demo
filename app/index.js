@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import debug from 'debug'
 import React from 'react'
 import { render } from 'react-dom'
+
 import Main from 'components/Main'
 
 const log = debug('application:bootstrap')

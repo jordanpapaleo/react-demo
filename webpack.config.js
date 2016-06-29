@@ -1,11 +1,15 @@
-var path = require('path')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+const loaders = require('./config/loaders')
+const preloaders = require('./config/preloaders')
 
 module.exports = {
   context: path.join(__dirname, 'app'),
+  // devtool: 'source-map',
   entry: './index.js',
   output: {
-    filename: 'bundle.js',
+    filename: 'bundle.min.js',
     path: path.join(__dirname, 'dist'),
     publicPath: 'http://localhost:8080/'
   },
@@ -16,41 +20,9 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   module: {
-    preLoaders: [],
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015']
-        }
-      },
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react']
-        }
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.less$/,
-        loader: 'style-loader!css-loader!less-loader'
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif|svg|mp4)$/,
-        loader: 'url-loader?limit=100000'
-      },
-      {
-        test: /\.(otf|ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file-loader'
-      }
-    ]
+    preLoaders: preloaders,
+    loaders: loaders,
+    noParse: /\.min\.js/
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -59,6 +31,17 @@ module.exports = {
       template: 'index.tmpl.html',
       inject: 'body',
       hash: true
-    })
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        API_URL: JSON.stringify({ blar: 'plop' })
+      }
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.AggressiveMergingPlugin({}),
+    new webpack.optimize.OccurenceOrderPlugin()
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true
+    // })
   ]
 }
