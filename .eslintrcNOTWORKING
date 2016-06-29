@@ -1,0 +1,18 @@
+{
+  "extends": ["react/recommended", "standard"],
+  "env": {
+    browser: true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      jsx: true
+    },
+    "sourceType": "module"
+  },
+  "rules": {
+    "spaced-comment": 0
+  }
+}
